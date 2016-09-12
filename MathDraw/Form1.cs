@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -17,12 +18,26 @@ namespace MathDraw {
 
         private void SetText(string text) {
 
-            if (this.richTextBox1.InvokeRequired) {
-                SetTextCallback d = new SetTextCallback(SetText);
-                this.Invoke(d, new object[] { text });
-            } else {
-                this.richTextBox1.Text += text;
+            if (!String.IsNullOrEmpty(text)) {
+
+                if (this.richTextBox1.InvokeRequired) {
+                    SetTextCallback d = new SetTextCallback(SetText);
+                    this.Invoke(d, new object[] { text });
+                } else {
+                    this.richTextBox1.Text += text;
+                }
             }
+        }
+
+        private void WriteToTextBox(int multiplier, int i, int j, Thread t, int end) {
+
+            string result = (Formula_Parser(formula.Text, i, j, t)).ToString();
+
+            int charnum = result.Length * multiplier;
+
+            string text = ((char)(charnum)).ToString();
+
+            SetText(text);
         }
 
         private void Draw(int start, int end, int randmin, int randmax, RichTextBox txt, Thread t) {
@@ -31,21 +46,19 @@ namespace MathDraw {
 
             int multiplier = rand.Next(randmin, randmax);
 
-            string result = "";
+            for (int i = start; i <= end; i++) {
 
-            for (int x = start; x <= end; x++) {
-
-                if (x > start)
+                if (i > start)
                     SetText("\n");
 
-                for (int y = start; y <= end; y++) {
-                    result = (Formula_Parser(formula.Text, x, y, t)).ToString();
-                    SetText(((char)(result.Length * multiplier)).ToString());
+                for (int j = start; j <= end; j++) {
+
+                    WriteToTextBox(multiplier, i, j, t, end);
                 }
 
-                for (int y = end - 1; y >= start; y--) {
-                    result = (Formula_Parser(formula.Text, x, y, t)).ToString();
-                    SetText(((char)(result.Length * multiplier)).ToString());
+                for (int j = end - 1; j >= start; j--) {
+
+                    WriteToTextBox(multiplier, i, j, t, end);
                 }
             }
         }
@@ -64,9 +77,9 @@ namespace MathDraw {
 
                 richTextBox1.Text = "";
                 StartTheThread(minn, maxn, minr, maxr);
-            } catch (Exception v) {
+            } catch (Exception ex) {
 
-                MessageBox.Show(v.ToString());
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -102,9 +115,9 @@ namespace MathDraw {
                 table.Rows.Add(row);
                 return double.Parse((string)row["expression"]);
 
-            } catch (Exception v) {
+            } catch (Exception ex) {
 
-                MessageBox.Show(v.ToString());
+                MessageBox.Show(ex.ToString());
                 t.Abort();
                 return 0;
             }
