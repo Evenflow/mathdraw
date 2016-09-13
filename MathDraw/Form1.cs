@@ -69,6 +69,9 @@ namespace MathDraw {
 
         private void button1_Click(object sender, EventArgs e) {
 
+            if (checkBox1.Checked)
+                Randomize();
+
             try {
                 int minr = int.Parse(minRand.Text);
                 int maxr = int.Parse(maxRand.Text);
@@ -141,6 +144,57 @@ namespace MathDraw {
             if (t != null) {
                 t.Abort();
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e) {
+            DialogResult result = colorDialog1.ShowDialog();
+
+            if (result == DialogResult.OK) {
+
+                var color = colorDialog1.Color;
+                richTextBox1.BackColor = color;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            DialogResult result = fontDialog1.ShowDialog();
+
+            if (result == DialogResult.OK) {
+
+                var font = fontDialog1.Font;
+                richTextBox1.Font = font;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            DialogResult result = colorDialog2.ShowDialog();
+
+            if (result == DialogResult.OK) {
+
+                var color = colorDialog2.Color;
+                richTextBox1.ForeColor = color;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e) {
+
+            Randomize();
+        }
+
+        private void Randomize() {
+            Random rand = new Random();
+
+            int range = 64;
+
+            int midpoint = rand.Next(-range, range);
+
+            int size = 32;
+
+            int low = midpoint - size;
+            int high = midpoint + size;
+
+            minNum.Text = rand.Next(low, midpoint).ToString();
+            maxNum.Text = rand.Next(midpoint, high).ToString();
         }
     }
 }

@@ -38,6 +38,14 @@
             this.minRand = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
+            this.button5 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -50,9 +58,9 @@
             this.button1.AutoSize = true;
             this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button1.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button1.Location = new System.Drawing.Point(0, 249);
+            this.button1.Location = new System.Drawing.Point(0, 517);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(667, 39);
+            this.button1.Size = new System.Drawing.Size(775, 39);
             this.button1.TabIndex = 0;
             this.button1.Text = "Draw";
             this.button1.UseVisualStyleBackColor = true;
@@ -72,12 +80,17 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.richTextBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(667, 249);
-            this.splitContainer1.SplitterDistance = 126;
+            this.splitContainer1.Size = new System.Drawing.Size(775, 517);
+            this.splitContainer1.SplitterDistance = 146;
             this.splitContainer1.TabIndex = 2;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.formula);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.maxNum);
@@ -92,7 +105,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(126, 249);
+            this.groupBox1.Size = new System.Drawing.Size(146, 517);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings: ";
@@ -104,7 +117,7 @@
             this.formula.Location = new System.Drawing.Point(3, 161);
             this.formula.MaxLength = 40;
             this.formula.Name = "formula";
-            this.formula.Size = new System.Drawing.Size(120, 19);
+            this.formula.Size = new System.Drawing.Size(140, 19);
             this.formula.TabIndex = 9;
             this.formula.Text = "i * j";
             // 
@@ -124,9 +137,9 @@
             this.maxNum.Dock = System.Windows.Forms.DockStyle.Top;
             this.maxNum.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.maxNum.Location = new System.Drawing.Point(3, 128);
-            this.maxNum.MaxLength = 3;
+            this.maxNum.MaxLength = 5;
             this.maxNum.Name = "maxNum";
-            this.maxNum.Size = new System.Drawing.Size(120, 19);
+            this.maxNum.Size = new System.Drawing.Size(140, 19);
             this.maxNum.TabIndex = 7;
             this.maxNum.Text = "40";
             // 
@@ -146,9 +159,9 @@
             this.minNum.Dock = System.Windows.Forms.DockStyle.Top;
             this.minNum.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.minNum.Location = new System.Drawing.Point(3, 95);
-            this.minNum.MaxLength = 3;
+            this.minNum.MaxLength = 5;
             this.minNum.Name = "minNum";
-            this.minNum.Size = new System.Drawing.Size(120, 19);
+            this.minNum.Size = new System.Drawing.Size(140, 19);
             this.minNum.TabIndex = 5;
             this.minNum.Text = "1";
             // 
@@ -168,9 +181,9 @@
             this.maxRand.Dock = System.Windows.Forms.DockStyle.Top;
             this.maxRand.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.maxRand.Location = new System.Drawing.Point(3, 62);
-            this.maxRand.MaxLength = 3;
+            this.maxRand.MaxLength = 5;
             this.maxRand.Name = "maxRand";
-            this.maxRand.Size = new System.Drawing.Size(120, 19);
+            this.maxRand.Size = new System.Drawing.Size(140, 19);
             this.maxRand.TabIndex = 3;
             this.maxRand.Text = "256";
             // 
@@ -190,9 +203,9 @@
             this.minRand.Dock = System.Windows.Forms.DockStyle.Top;
             this.minRand.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.minRand.Location = new System.Drawing.Point(3, 29);
-            this.minRand.MaxLength = 3;
+            this.minRand.MaxLength = 5;
             this.minRand.Name = "minRand";
-            this.minRand.Size = new System.Drawing.Size(120, 19);
+            this.minRand.Size = new System.Drawing.Size(140, 19);
             this.minRand.TabIndex = 1;
             this.minRand.Text = "1";
             // 
@@ -211,19 +224,83 @@
             // 
             this.richTextBox1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.richTextBox1.ForeColor = System.Drawing.Color.Lime;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(537, 249);
+            this.richTextBox1.Size = new System.Drawing.Size(625, 517);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            // 
+            // button3
+            // 
+            this.button3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button3.Location = new System.Drawing.Point(3, 491);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(140, 23);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "font";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button4.Location = new System.Drawing.Point(3, 468);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(140, 23);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "background color";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // fontDialog1
+            // 
+            this.fontDialog1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button2.Location = new System.Drawing.Point(3, 445);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(140, 23);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "font color";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // colorDialog2
+            // 
+            this.colorDialog2.Color = System.Drawing.Color.Lime;
+            // 
+            // button5
+            // 
+            this.button5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button5.Location = new System.Drawing.Point(3, 180);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(140, 23);
+            this.button5.TabIndex = 14;
+            this.button5.Text = "Randomize";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox1.Location = new System.Drawing.Point(3, 203);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(140, 18);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "randomize each draw";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 288);
+            this.ClientSize = new System.Drawing.Size(775, 556);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
@@ -261,6 +338,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox minRand;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ColorDialog colorDialog2;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
