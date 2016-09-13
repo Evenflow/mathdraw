@@ -30,25 +30,20 @@ namespace MathDraw {
             }
         }
 
-        private void WriteToTextBox(int multiplier, int i, int j, Thread t, int end) {
+        private void WriteToTextBox(int i, int j, Thread t) {
 
             string result = (Formula_Parser(formula.Text, i, j, t)).ToString();
 
-            int charnum = result.Length * multiplier;
+            int charnum = result.Length * int.Parse(charmod.Text);
 
             string text = ((char)(charnum)).ToString();
 
             SetText(text);
         }
 
-        private void Draw(int start, int end, int randmin, int randmax, RichTextBox txt, Thread t) {
+        private void Draw(int start, int end, Thread t) {
 
-            Random rand = new Random();
             try {
-
-                int multiplier = rand.Next(randmin, randmax);
-
-                Console.WriteLine(multiplier.ToString());
 
                 for (int i = start; i <= end; i++) {
 
@@ -57,12 +52,12 @@ namespace MathDraw {
 
                     for (int j = start; j <= end; j++) {
 
-                        WriteToTextBox(multiplier, i, j, t, end);
+                        WriteToTextBox(i, j, t);
                     }
 
                     for (int j = end - 1; j >= start; j--) {
 
-                        WriteToTextBox(multiplier, i, j, t, end);
+                        WriteToTextBox(i, j, t);
                     }
                 }
             } catch (Exception ex) {
@@ -81,13 +76,11 @@ namespace MathDraw {
                 Randomize();
 
             try {
-                int minr = int.Parse(minRand.Text);
-                int maxr = int.Parse(maxRand.Text);
                 int minn = int.Parse(minNum.Text);
                 int maxn = int.Parse(maxNum.Text);
 
                 richTextBox1.Text = "";
-                StartTheThread(minn, maxn, minr, maxr);
+                StartTheThread(minn, maxn);
 
             } catch (Exception ex) {
 
@@ -132,15 +125,15 @@ namespace MathDraw {
             }
         }
 
-        private Thread StartTheThread(int param1, int param2, int param3, int param4) {
+        private Thread StartTheThread(int minn, int maxn) {
 
             if (t == null) {
-                t = new Thread(() => Draw(param1, param2, param3, param4, richTextBox1, t));
+                t = new Thread(() => Draw(minn, maxn, t));
                 t.Start();
                 return t;
             } else {
                 t.Abort();
-                t = new Thread(() => Draw(param1, param2, param3, param4, richTextBox1, t));
+                t = new Thread(() => Draw(minn, maxn, t));
                 t.Start();
                 return t;
             }
@@ -182,25 +175,32 @@ namespace MathDraw {
             }
         }
 
-        private void button5_Click(object sender, EventArgs e) {
-
-            Randomize();
-        }
-
         private void Randomize() {
             Random rand = new Random();
 
             int range = 128;
+            int sizerange = 50;
+            int size = 15;
 
-            int midpoint = rand.Next(-range, range);
+            int imod = rand.Next(-range, range);
+            int jmod = rand.Next(-range, range);
 
-            int size = 64;
+            int midpoint = rand.Next(-sizerange, sizerange);
 
             int low = midpoint - size;
             int high = midpoint + size;
 
-            minNum.Text = rand.Next(low, midpoint).ToString();
-            maxNum.Text = rand.Next(midpoint, high).ToString();
+            int zmod = rand.Next(-range, range);
+
+            minNum.Text = low.ToString();
+            maxNum.Text = high.ToString();
+
+            formula.Text = "(i + (" + imod + ")) * (j + (" + jmod + ")) * (" + zmod + ")";
+        }
+
+        private void button5_Click_1(object sender, EventArgs e) {
+
+            Randomize();
         }
     }
 }
