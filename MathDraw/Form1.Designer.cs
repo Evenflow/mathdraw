@@ -196,7 +196,7 @@
             this.maxNum.Name = "maxNum";
             this.maxNum.Size = new System.Drawing.Size(140, 19);
             this.maxNum.TabIndex = 7;
-            this.maxNum.Text = "40";
+            this.maxNum.Text = "15";
             // 
             // label4
             // 
@@ -218,7 +218,7 @@
             this.minNum.Name = "minNum";
             this.minNum.Size = new System.Drawing.Size(140, 19);
             this.minNum.TabIndex = 5;
-            this.minNum.Text = "1";
+            this.minNum.Text = "-15";
             // 
             // label3
             // 
@@ -240,7 +240,7 @@
             this.maxRand.Name = "maxRand";
             this.maxRand.Size = new System.Drawing.Size(140, 19);
             this.maxRand.TabIndex = 3;
-            this.maxRand.Text = "256";
+            this.maxRand.Text = "250";
             // 
             // label2
             // 
@@ -262,7 +262,7 @@
             this.minRand.Name = "minRand";
             this.minRand.Size = new System.Drawing.Size(140, 19);
             this.minRand.TabIndex = 1;
-            this.minRand.Text = "1";
+            this.minRand.Text = "15";
             // 
             // label1
             // 

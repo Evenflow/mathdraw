@@ -192,15 +192,23 @@ namespace MathDraw {
 
             int range = 128;
 
-            int midpoint = rand.Next(-range, range);
+            int imod = rand.Next(-range, range);
+            int jmod = rand.Next(-range, range);
 
-            int size = 64;
+            int sizerange = 50;
+            int size = 32;
+
+            int midpoint = rand.Next(-sizerange, sizerange);
 
             int low = midpoint - size;
             int high = midpoint + size;
 
+            int zmod = rand.Next(-range, range);
+
             minNum.Text = rand.Next(low, midpoint).ToString();
             maxNum.Text = rand.Next(midpoint, high).ToString();
+
+            formula.Text = "(i + (" + imod + ")) * (j + (" + jmod + ")) * (" + zmod + ")";
         }
     }
 }
