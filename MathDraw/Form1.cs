@@ -184,11 +184,11 @@ namespace MathDraw {
         private void Randomize() {
             Random rand = new Random();
 
-            int range = 64;
+            int range = 128;
 
             int midpoint = rand.Next(-range, range);
 
-            int size = 32;
+            int size = 64;
 
             int low = midpoint - size;
             int high = midpoint + size;
