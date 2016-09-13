@@ -44,23 +44,30 @@ namespace MathDraw {
         private void Draw(int start, int end, int randmin, int randmax, RichTextBox txt, Thread t) {
 
             Random rand = new Random();
+            try {
 
-            int multiplier = rand.Next(randmin, randmax);
+                int multiplier = rand.Next(randmin, randmax);
 
-            for (int i = start; i <= end; i++) {
+                Console.WriteLine(multiplier.ToString());
 
-                if (i > start)
-                    SetText("\n");
+                for (int i = start; i <= end; i++) {
 
-                for (int j = start; j <= end; j++) {
+                    if (i > start)
+                        SetText("\n");
 
-                    WriteToTextBox(multiplier, i, j, t, end);
+                    for (int j = start; j <= end; j++) {
+
+                        WriteToTextBox(multiplier, i, j, t, end);
+                    }
+
+                    for (int j = end - 1; j >= start; j--) {
+
+                        WriteToTextBox(multiplier, i, j, t, end);
+                    }
                 }
+            } catch (Exception ex) {
 
-                for (int j = end - 1; j >= start; j--) {
-
-                    WriteToTextBox(multiplier, i, j, t, end);
-                }
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -81,9 +88,10 @@ namespace MathDraw {
 
                 richTextBox1.Text = "";
                 StartTheThread(minn, maxn, minr, maxr);
+
             } catch (Exception ex) {
 
-                MessageBox.Show(ex.ToString());
+                Console.WriteLine(ex.ToString());
             }
         }
 
@@ -110,8 +118,7 @@ namespace MathDraw {
             return Evaluate(formula, t);
         }
 
-
-        public double Evaluate(string expression, Thread t) {
+        private double Evaluate(string expression, Thread t) {
 
             try {
 
@@ -120,13 +127,12 @@ namespace MathDraw {
 
             } catch (Exception ex) {
 
-                MessageBox.Show(ex.ToString());
                 t.Abort();
                 return 0;
             }
         }
 
-        public Thread StartTheThread(int param1, int param2, int param3, int param4) {
+        private Thread StartTheThread(int param1, int param2, int param3, int param4) {
 
             if (t == null) {
                 t = new Thread(() => Draw(param1, param2, param3, param4, richTextBox1, t));
