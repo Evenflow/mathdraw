@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NCalc;
+using System;
 using System.Data;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -86,7 +87,7 @@ namespace MathDraw {
             }
         }
 
-        private int Formula_Parser(string formula, int x, int y, Thread t) {
+        private double Formula_Parser(string formula, int x, int y, Thread t) {
 
             formula = formula.Trim();
 
@@ -106,17 +107,16 @@ namespace MathDraw {
                 return 0;
             }
 
-            return (int)Evaluate(formula, t);
+            return Evaluate(formula, t);
         }
+
 
         public double Evaluate(string expression, Thread t) {
 
             try {
-                DataTable table = new DataTable();
-                table.Columns.Add("expression", typeof(string), expression);
-                DataRow row = table.NewRow();
-                table.Rows.Add(row);
-                return double.Parse((string)row["expression"]);
+
+                Expression e = new Expression(expression);
+                return Double.Parse(e.Evaluate().ToString());
 
             } catch (Exception ex) {
 

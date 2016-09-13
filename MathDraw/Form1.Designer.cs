@@ -287,6 +287,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(625, 517);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            this.richTextBox1.WordWrap = false;
             // 
             // fontDialog1
             // 
