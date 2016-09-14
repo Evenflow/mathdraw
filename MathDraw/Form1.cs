@@ -91,6 +91,9 @@ namespace MathDraw {
 
                         while (len > 5) {
                             len -= 4;
+                            if (len == 0) {
+                                len = 2;
+                            }
                         }
 
                         int charnum = len * int.Parse(charmod.Text);
@@ -107,7 +110,10 @@ namespace MathDraw {
                         int len = result.Length;
 
                         while (len > 5) {
-                            len = len - 5;
+                            len -= 4;
+                            if (len == 0) {
+                                len = 2;
+                            }
                         }
 
                         int charnum = len * int.Parse(charmod.Text);
