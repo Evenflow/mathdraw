@@ -12,7 +12,7 @@ namespace MathDraw {
     public partial class Form1 : Form {
 
         delegate void SetTextCallback(string text, int selecttab);
-        delegate void SetProgressCallback(int progress, ProgressBar pb);
+        delegate void SetProgressCallback(int progress, ProgressBar pb, TabPage page, Button stopBtn);
 
         List<Thread> t;
         List<RichTextBox> currentTextbox;
@@ -36,31 +36,49 @@ namespace MathDraw {
             }
         }
 
-        private void SetProgress(int progress, ProgressBar pb) {
+        private void SetProgress(int progress, ProgressBar pb, TabPage page, Button stopBtn) {
 
             if (pb.InvokeRequired) {
                 SetProgressCallback d = new SetProgressCallback(SetProgress);
-                this.Invoke(d, new object[] { progress, pb });
+                this.Invoke(d, new object[] { progress, pb, page, stopBtn });
             } else {
                 pb.Value = progress;
             }
+
+            if (progress >= 100) {
+                page.Controls.Remove(pb);
+                page.Controls.Remove(stopBtn);
+            }
         }
 
-        private void Draw(string formula, int start, int end, Thread t, int selecttab, ProgressBar pb) {
+        private string CalculateEta(DateTime processStarted, int totalElements, int processedElements) {
+
+            float timePassed = (processStarted - DateTime.Now).Milliseconds;
+
+            float itemsPerMiliSecond = processedElements / Math.Abs(timePassed);
+
+            float miliSecondsRemaining = (totalElements - processedElements) / (itemsPerMiliSecond);
+
+            return new TimeSpan(0, 0, (int)miliSecondsRemaining * 1000).ToString();
+        }
+
+        private void Draw(string formula, int start, int end, Thread t, int selecttab, ProgressBar pb, TabPage page, Button stopBtn) {
 
             try {
+
+                DateTime startTime = DateTime.Now;
 
                 float diff = Math.Abs(start - end);
 
                 SetText(formula + "\n\n", selecttab);
 
-                int counter = 0;
+                int proc = 0;
 
                 for (int i = start; i <= end; i++) {
 
-                    SetProgress((int)((counter / diff)* 100), pb);
+                    SetProgress((int)((proc / diff)* 100), pb, page, stopBtn);
 
-                    counter++;
+                    proc++;
 
                     if (i > start)
                         SetText("\n", selecttab);
@@ -100,8 +118,11 @@ namespace MathDraw {
                     }
                 }
 
+                page.Controls.Remove(pb);
+
             } catch (Exception ex) {
 
+                MessageBox.Show(ex.ToString());
                 Console.WriteLine(ex.ToString());
             }
         }
@@ -184,10 +205,11 @@ namespace MathDraw {
             }
         }
 
-        void Stop(object sender, EventArgs e, Thread t) {
+        void Stop(object sender, EventArgs e, TabPage page, Thread t, Button b) {
             if (t != null) {
                 t.Abort();
             }
+            page.Controls.Remove(b);
         }
 
         void Close(object sender, EventArgs e, TabPage page, Thread t) {
@@ -200,8 +222,6 @@ namespace MathDraw {
         }
 
         private Thread StartTheThread(int minn, int maxn, int selecttab, TabPage page) {
-
-
 
             Button stopBtn = new Button();
 
@@ -220,10 +240,10 @@ namespace MathDraw {
             page.Controls.Add(btnClose);
             page.Controls.Add(pb);
 
-            Thread newt = new Thread(() => Draw(formula.Text, minn, maxn, t[t.Count - 1], selecttab, pb));
+            Thread newt = new Thread(() => Draw(formula.Text, minn, maxn, t[t.Count - 1], selecttab, pb, page, stopBtn));
             newt.Start();
 
-            stopBtn.Click += (sender, EventArgs) => { Stop(sender, EventArgs, newt); };
+            stopBtn.Click += (sender, EventArgs) => { Stop(sender, EventArgs, page, newt, stopBtn); };
             btnClose.Click += (sender, EventArgs) => { Close(sender, EventArgs, page, newt); };
 
             t.Add(newt);
