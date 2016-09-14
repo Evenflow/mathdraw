@@ -122,7 +122,6 @@ namespace MathDraw {
 
             } catch (Exception ex) {
 
-                MessageBox.Show(ex.ToString());
                 Console.WriteLine(ex.ToString());
             }
         }
