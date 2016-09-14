@@ -12,6 +12,7 @@ namespace MathDraw {
     public partial class Form1 : Form {
 
         delegate void SetTextCallback(string text, int selecttab);
+        delegate void SetProgressCallback(int progress, ProgressBar pb);
 
         List<Thread> t;
         List<RichTextBox> currentTextbox;
@@ -35,13 +36,31 @@ namespace MathDraw {
             }
         }
 
-        private void Draw(string formula, int start, int end, Thread t, int selecttab) {
+        private void SetProgress(int progress, ProgressBar pb) {
+
+            if (pb.InvokeRequired) {
+                SetProgressCallback d = new SetProgressCallback(SetProgress);
+                this.Invoke(d, new object[] { progress, pb });
+            } else {
+                pb.Value = progress;
+            }
+        }
+
+        private void Draw(string formula, int start, int end, Thread t, int selecttab, ProgressBar pb) {
 
             try {
 
+                float diff = Math.Abs(start - end);
+
                 SetText(formula + "\n\n", selecttab);
 
+                int counter = 0;
+
                 for (int i = start; i <= end; i++) {
+
+                    SetProgress((int)((counter / diff)* 100), pb);
+
+                    counter++;
 
                     if (i > start)
                         SetText("\n", selecttab);
@@ -53,10 +72,8 @@ namespace MathDraw {
                         int len = result.Length;
 
                         while (len > 5) {
-                            len = len - 5;
+                            len -= 4;
                         }
-
-                        //MessageBox.Show(len.ToString());
 
                         int charnum = len * int.Parse(charmod.Text);
 
@@ -75,8 +92,6 @@ namespace MathDraw {
                             len = len - 5;
                         }
 
-                        //MessageBox.Show(len.ToString());
-
                         int charnum = len * int.Parse(charmod.Text);
 
                         string text = ((char)(charnum)).ToString();
@@ -84,6 +99,7 @@ namespace MathDraw {
                         SetText(text, selecttab);
                     }
                 }
+
             } catch (Exception ex) {
 
                 Console.WriteLine(ex.ToString());
@@ -108,6 +124,7 @@ namespace MathDraw {
                 currentTextbox[currentTabIndex].ForeColor = colorDialog2.Color;
                 currentTextbox[currentTabIndex].BackColor = colorDialog1.Color;
 
+
                 page.Controls.Add(currentTextbox[currentTabIndex]);
                 tabControl1.TabPages.Add(page);
                 tabControl1.SelectedTab = page;
@@ -120,7 +137,7 @@ namespace MathDraw {
 
                 currentTextbox[currentTabIndex].Text = "";
 
-                StartTheThread(minn, maxn, currentTabIndex);
+                StartTheThread(minn, maxn, currentTabIndex, page);
 
                 currentTabIndex++;
 
@@ -167,10 +184,50 @@ namespace MathDraw {
             }
         }
 
-        private Thread StartTheThread(int minn, int maxn, int selecttab) {
+        void Stop(object sender, EventArgs e, Thread t) {
+            if (t != null) {
+                t.Abort();
+            }
+        }
 
-            Thread newt = new Thread(() => Draw(formula.Text, minn, maxn, t[t.Count - 1], selecttab));
+        void Close(object sender, EventArgs e, TabPage page, Thread t) {
+            if (page != null) {
+                tabControl1.TabPages.Remove(page);
+            }
+            if (t != null) {
+                t.Abort();
+            }
+        }
+
+        private Thread StartTheThread(int minn, int maxn, int selecttab, TabPage page) {
+
+
+
+            Button stopBtn = new Button();
+
+            stopBtn.Text = "Stop";
+            stopBtn.Dock = DockStyle.Bottom;
+            stopBtn.Font = fontDialog1.Font;
+
+            Button btnClose = new Button();
+
+            btnClose.Text = "Close";
+            btnClose.Dock = DockStyle.Bottom;
+            btnClose.Font = fontDialog1.Font;
+
+            ProgressBar pb = new ProgressBar();
+            pb.Dock = DockStyle.Bottom;
+
+            page.Controls.Add(stopBtn);
+            page.Controls.Add(btnClose);
+            page.Controls.Add(pb);
+
+            Thread newt = new Thread(() => Draw(formula.Text, minn, maxn, t[t.Count - 1], selecttab, pb));
             newt.Start();
+
+            stopBtn.Click += (sender, EventArgs) => { Stop(sender, EventArgs, newt); };
+            btnClose.Click += (sender, EventArgs) => { Close(sender, EventArgs, page, newt); };
+
             t.Add(newt);
             return newt;
         }
