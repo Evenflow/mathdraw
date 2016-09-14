@@ -3,7 +3,7 @@
 This is an ASCII drawing tool using a math formula. <br />
 The formula can take 2 variables (i and j) and use the basic math operations. <br />
  <br />
-You can also change the random ASCII char modifier and the size of the ASCII image. <br />
+You can also change the ASCII char modifier and the size of the ASCII image. <br />
 
 <br />
 <b>This project is using NCalc</b> http://ncalc.codeplex.com/
