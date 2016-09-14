@@ -207,13 +207,11 @@ namespace MathDraw {
 
             stopBtn.Text = "Stop";
             stopBtn.Dock = DockStyle.Bottom;
-            stopBtn.Font = fontDialog1.Font;
 
             Button btnClose = new Button();
 
             btnClose.Text = "Close";
             btnClose.Dock = DockStyle.Bottom;
-            btnClose.Font = fontDialog1.Font;
 
             ProgressBar pb = new ProgressBar();
             pb.Dock = DockStyle.Bottom;
