@@ -227,20 +227,13 @@ namespace MathDraw {
 
             int range = 128;
             int sizerange = 50;
-            int size = 15;
 
             int imod = rand.Next(-range, range);
             int jmod = rand.Next(-range, range);
 
             int midpoint = rand.Next(-sizerange, sizerange);
 
-            int low = midpoint - size;
-            int high = midpoint + size;
-
             int zmod = rand.Next(0, range);
-
-            minNum.Text = low.ToString();
-            maxNum.Text = high.ToString();
 
             int randomroll = rand.Next(-1, 1);
 
