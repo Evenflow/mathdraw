@@ -31,8 +31,6 @@ namespace MathDraw {
         int labelCounter = 0;
         int remCoresNumber;
 
-        string holder;
-
         #endregion
 
         #region core affinity
@@ -92,7 +90,7 @@ namespace MathDraw {
                 }
             } catch (Exception ex) {
 
-                Utils.instance.MessageBoxDebug("SetLabel: " + ex.ToString());
+                Utils.Instance.MessageBoxDebug("SetLabel: " + ex.ToString());
                 Console.WriteLine(ex.ToString());
             }
         }
@@ -112,7 +110,7 @@ namespace MathDraw {
 
             } catch (Exception ex) {
 
-                Utils.instance.MessageBoxDebug("SetText: " + ex.ToString());
+                Utils.Instance.MessageBoxDebug("SetText: " + ex.ToString());
                 Console.WriteLine(ex.ToString());
             }
         }
@@ -125,6 +123,8 @@ namespace MathDraw {
             }
 
             coresNumber--;
+
+            string holder = "";
 
             if (coresNumber <= 0)
                 coresNumber = remCoresNumber;
@@ -145,7 +145,7 @@ namespace MathDraw {
 
                     SetProgress((int)((counter / diff) * 100), pb, page, stopBtn, timeLeftLabel);
 
-                    string eta = Utils.instance.CalculateEta(started, (int)diff, counter);
+                    string eta = Utils.Instance.CalculateEta(started, (int)diff, counter);
 
                     SetLabel(eta, timeLeftLabel);
 
@@ -156,10 +156,10 @@ namespace MathDraw {
 
                     for (int j = start; j <= end; j++) {
 
-                        CharGenerator(formula, thread, selectedTab, i, j);
+                        holder += CharGenerator(formula, thread, selectedTab, i, j);
                     }
 
-                    holder = Utils.instance.Reverse(holder);
+                    holder = Utils.Instance.Reverse(holder);
 
                     SetText(holder, selectedTab);
                 }
@@ -172,12 +172,13 @@ namespace MathDraw {
                 thread.Abort();
             } finally {
 
-                Thread.EndThreadAffinity();
+                if (affinity)
+                    Thread.EndThreadAffinity();
             }
         }
 
-        private void CharGenerator(string formula, Thread thread, int selectedTab, int i, int j) {
-            string result = (NCalc.instance.Formula_Parser(formula, i, j, thread)).ToString();
+        private string CharGenerator(string formula, Thread thread, int selectedTab, int i, int j) {
+            string result = (NCalc.Instance.Formula_Parser(formula, i, j, thread)).ToString();
 
             int len = result.Length;
 
@@ -189,9 +190,9 @@ namespace MathDraw {
 
             string text = ((char)(charnum)).ToString();
 
-            holder += text;
-
             SetText(text, selectedTab);
+
+            return text;
         }
 
         #endregion
@@ -232,7 +233,7 @@ namespace MathDraw {
 
             } catch (Exception ex) {
 
-                Utils.instance.MessageBoxDebug("drawBtn_Clicked: " + ex.ToString());
+                Utils.Instance.MessageBoxDebug("drawBtn_Clicked: " + ex.ToString());
                 Console.WriteLine(ex.ToString());
             }
         }
@@ -306,7 +307,7 @@ namespace MathDraw {
 
             } catch (Exception ex) {
 
-                Utils.instance.MessageBoxDebug("SetProgress: " + ex.ToString());
+                Utils.Instance.MessageBoxDebug("SetProgress: " + ex.ToString());
                 Console.WriteLine(ex.ToString());
             }
         }

@@ -5,13 +5,23 @@ using System.Windows.Forms;
 
 namespace MathDraw {
 
-    public class NCalc {
+    public sealed class NCalc {
 
-        public static NCalc instance;
+        private static readonly Object s_lock = new Object();
+        private static NCalc instance = null;
 
-        static NCalc() {
+        private NCalc() {
+        }
 
-            instance = new NCalc();
+        public static NCalc Instance {
+            get {
+                if (instance != null) return instance;
+                Monitor.Enter(s_lock);
+                NCalc temp = new NCalc();
+                Interlocked.Exchange(ref instance, temp);
+                Monitor.Exit(s_lock);
+                return instance;
+            }
         }
 
         public double Formula_Parser(string formula, int x, int y, Thread thread) {
@@ -42,7 +52,7 @@ namespace MathDraw {
 
                 thread.Abort();
                 Console.WriteLine(ex.ToString());
-                Utils.instance.MessageBoxDebug("Evaluate: " + ex.ToString());
+                Utils.Instance.MessageBoxDebug("Evaluate: " + ex.ToString());
                 return 0;
             }
         }

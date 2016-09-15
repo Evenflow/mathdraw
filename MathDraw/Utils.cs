@@ -1,17 +1,28 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MathDraw {
 
-    class Utils {
+    public sealed class Utils {
 
         static bool msgBoxDebug = false;
 
-        public static Utils instance;
+        private static readonly Object s_lock = new Object();
+        private static Utils instance = null;
 
-        static Utils() {
+        private Utils() {
+        }
 
-            instance = new Utils();
+        public static Utils Instance {
+            get {
+                if (instance != null) return instance;
+                Monitor.Enter(s_lock);
+                Utils temp = new Utils();
+                Interlocked.Exchange(ref instance, temp);
+                Monitor.Exit(s_lock);
+                return instance;
+            }
         }
 
         public void MessageBoxDebug(string text) {
@@ -44,6 +55,5 @@ namespace MathDraw {
             Array.Reverse(charArray);
             return new string(charArray);
         }
-
     }
 }
