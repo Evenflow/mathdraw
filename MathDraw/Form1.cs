@@ -31,6 +31,8 @@ namespace MathDraw {
         int labelCounter = 0;
         int remCoresNumber;
 
+        string holder;
+
         #endregion
 
         #region core affinity
@@ -104,7 +106,7 @@ namespace MathDraw {
                         SetTextCallback delgt = new SetTextCallback(SetText);
                         this.Invoke(delgt, new object[] { text, selectedTab });
                     } else {
-                        textBoxList[selectedTab].Text += text;
+                        textBoxList[selectedTab].AppendText(text);
                     }
                 }
 
@@ -139,6 +141,8 @@ namespace MathDraw {
 
                 for (int i = start; i <= end; i++) {
 
+                    holder = "";
+
                     SetProgress((int)((counter / diff) * 100), pb, page, stopBtn, timeLeftLabel);
 
                     string eta = Utils.instance.CalculateEta(started, (int)diff, counter);
@@ -155,10 +159,9 @@ namespace MathDraw {
                         CharGenerator(formula, thread, selectedTab, i, j);
                     }
 
-                    for (int j = end - 1; j >= start; j--) {
+                    holder = Utils.instance.Reverse(holder);
 
-                        CharGenerator(formula, thread, selectedTab, i, j);
-                    }
+                    SetText(holder, selectedTab);
                 }
 
                 page.Controls.Remove(pb);
@@ -178,16 +181,15 @@ namespace MathDraw {
 
             int len = result.Length;
 
-            while (len > 5) {
-                len -= 4;
-                if (len == 0) {
-                    len = 2;
-                }
+            while (len > 3) {
+                len -= 2;
             }
 
             int charnum = len * int.Parse(charmod.Text);
 
             string text = ((char)(charnum)).ToString();
+
+            holder += text;
 
             SetText(text, selectedTab);
         }
