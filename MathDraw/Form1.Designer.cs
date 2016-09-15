@@ -74,7 +74,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "draw";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.drawBtn_Clicked);
             // 
             // splitContainer1
             // 
@@ -140,7 +140,7 @@
             this.button5.TabIndex = 22;
             this.button5.Text = "randomize";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            this.button5.Click += new System.EventHandler(this.RandomizeBtn_Clicked);
             // 
             // formula
             // 
@@ -195,7 +195,7 @@
             this.button2.TabIndex = 13;
             this.button2.Text = "font color";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.fontColorBtn_Clicked);
             // 
             // button4
             // 
@@ -206,7 +206,7 @@
             this.button4.TabIndex = 12;
             this.button4.Text = "background color";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.backgroundColorBtn_Clicked);
             // 
             // button3
             // 
@@ -217,7 +217,7 @@
             this.button3.TabIndex = 11;
             this.button3.Text = "font";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.fontBtn_Clicked);
             // 
             // maxNum
             // 
