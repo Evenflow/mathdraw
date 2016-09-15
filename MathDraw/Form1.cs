@@ -1,15 +1,13 @@
-﻿using NCalc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace MathDraw {
+
     public partial class Form1 : Form {
+
+        #region vars
 
         delegate void SetTextCallback(string text, int selectedTab);
         delegate void SetProgressCallback(int progress, ProgressBar pb, TabPage page, Button stopBtn);
@@ -21,9 +19,34 @@ namespace MathDraw {
 
         bool msgBoxDebug = true;
 
+        Calc calc;
+
+        #endregion
+
+        #region form1 stuff
+
         public Form1() {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e) {
+
+            textBoxList = new List<RichTextBox>();
+            threadList = new List<Thread>();
+            calc = new Calc(MessageBoxDebug);
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+
+            foreach (var item in threadList) {
+                if (item != null)
+                    item.Abort();
+            }
+        }
+
+        #endregion
+
+        #region draw main methods
 
         private void SetText(string text, int selectedTab) {
 
@@ -37,34 +60,6 @@ namespace MathDraw {
                 }
             }
         }
-
-        private void SetProgress(int progress, ProgressBar pb, TabPage page, Button stopBtn) {
-
-            if (pb.InvokeRequired) {
-                SetProgressCallback d = new SetProgressCallback(SetProgress);
-                this.Invoke(d, new object[] { progress, pb, page, stopBtn });
-            } else {
-                pb.Value = progress;
-            }
-
-            if (progress == 100) {
-                page.Controls.Remove(pb);
-                page.Controls.Remove(stopBtn);
-            }
-        }
-
-        /*
-        private string CalculateEta(DateTime processStarted, int totalElements, int processedElements) {
-
-            float timePassed = (processStarted - DateTime.Now).Milliseconds;
-
-            float itemsPerMiliSecond = processedElements / Math.Abs(timePassed);
-
-            float miliSecondsRemaining = (totalElements - processedElements) / (itemsPerMiliSecond);
-
-            return new TimeSpan(0, 0, (int)miliSecondsRemaining * 1000).ToString();
-        }
-        */
 
         private void Draw(string formula, int start, int end, Thread thread, int selectedTab, ProgressBar pb, TabPage page, Button stopBtn) {
 
@@ -107,7 +102,7 @@ namespace MathDraw {
         }
 
         private void CharGenerator(string formula, Thread thread, int selectedTab, int i, int j) {
-            string result = (Formula_Parser(formula, i, j, thread)).ToString();
+            string result = (calc.Formula_Parser(formula, i, j, thread)).ToString();
 
             int len = result.Length;
 
@@ -125,10 +120,22 @@ namespace MathDraw {
             SetText(text, selectedTab);
         }
 
-        private void Form1_Load(object sender, EventArgs e) {
+        #endregion
 
-            textBoxList = new List<RichTextBox>();
-            threadList = new List<Thread>();
+        #region button clicks
+
+        private void backgroundColorBtn_Clicked(object sender, EventArgs e) {
+            DialogResult result = colorDialog1.ShowDialog();
+
+            if (result == DialogResult.OK) {
+
+                var color = colorDialog1.Color;
+
+                foreach (var item in textBoxList) {
+                    if (item != null)
+                        item.BackColor = color;
+                }
+            }
         }
 
         private void drawBtn_Clicked(object sender, EventArgs e) {
@@ -167,40 +174,58 @@ namespace MathDraw {
             }
         }
 
-        private double Formula_Parser(string formula, int x, int y, Thread thread) {
+        private void fontBtn_Clicked(object sender, EventArgs e) {
+            DialogResult result = fontDialog1.ShowDialog();
 
-            formula = formula.Trim();
+            if (result == DialogResult.OK) {
 
-            if (String.IsNullOrEmpty(formula)) {
+                var font = fontDialog1.Font;
 
-                MessageBox.Show("Formula cannot be empty!");
-                thread.Abort();
-                return 0;
-            }
-
-            formula = formula.Replace("i", x.ToString());
-            formula = formula.Replace("j", y.ToString());
-
-            return Evaluate(formula, thread);
-        }
-
-        private double Evaluate(string expression, Thread thread) {
-
-            try {
-
-                Expression e = new Expression(expression);
-                return Double.Parse(e.Evaluate().ToString());
-
-            } catch (Exception ex) {
-
-                thread.Abort();
-                Console.WriteLine(ex.ToString());
-                MessageBoxDebug("Evaluate: " + ex.ToString());
-                return 0;
+                foreach (var item in textBoxList) {
+                    if (item != null)
+                        item.Font = font;
+                }
             }
         }
 
-        void Stop(object sender, EventArgs e, TabPage page, Thread thread, Button btn) {
+        private void fontColorBtn_Clicked(object sender, EventArgs e) {
+            DialogResult result = colorDialog2.ShowDialog();
+
+            if (result == DialogResult.OK) {
+
+                var color = colorDialog2.Color;
+
+                foreach (var item in textBoxList) {
+                    if (item != null)
+                        item.ForeColor = color;
+                }
+            }
+        }
+
+        private void RandomizeBtn_Clicked(object sender, EventArgs e) {
+            Randomize();
+        }
+
+        #endregion
+
+        #region draw additional methods
+
+        private void SetProgress(int progress, ProgressBar pb, TabPage page, Button stopBtn) {
+
+            if (pb.InvokeRequired) {
+                SetProgressCallback d = new SetProgressCallback(SetProgress);
+                this.Invoke(d, new object[] { progress, pb, page, stopBtn });
+            } else {
+                pb.Value = progress;
+            }
+
+            if (progress == 100) {
+                page.Controls.Remove(pb);
+                page.Controls.Remove(stopBtn);
+            }
+        }
+
+        private void Stop(object sender, EventArgs e, TabPage page, Thread thread, Button btn) {
             if (thread != null)
                 thread.Abort();
 
@@ -208,7 +233,7 @@ namespace MathDraw {
                 page.Controls.Remove(btn);
         }
 
-        void Close(object sender, EventArgs e, TabPage page, Thread thread) {
+        private void Close(object sender, EventArgs e, TabPage page, Thread thread) {
             if (page != null)
                 tabsHolder.TabPages.Remove(page);
 
@@ -245,56 +270,6 @@ namespace MathDraw {
             return newt;
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
-
-            foreach (var item in threadList) {
-                if (item != null)
-                    item.Abort();
-            }
-        }
-
-        private void backgroundColorBtn_Clicked(object sender, EventArgs e) {
-            DialogResult result = colorDialog1.ShowDialog();
-
-            if (result == DialogResult.OK) {
-
-                var color = colorDialog1.Color;
-
-                foreach (var item in textBoxList) {
-                    if (item != null)
-                        item.BackColor = color;
-                }
-            }
-        }
-
-        private void fontBtn_Clicked(object sender, EventArgs e) {
-            DialogResult result = fontDialog1.ShowDialog();
-
-            if (result == DialogResult.OK) {
-
-                var font = fontDialog1.Font;
-
-                foreach (var item in textBoxList) {
-                    if (item != null)
-                        item.Font = font;
-                }
-            }
-        }
-
-        private void fontColorBtn_Clicked(object sender, EventArgs e) {
-            DialogResult result = colorDialog2.ShowDialog();
-
-            if (result == DialogResult.OK) {
-
-                var color = colorDialog2.Color;
-
-                foreach (var item in textBoxList) {
-                    if (item != null)
-                        item.ForeColor = color;
-                }
-            }
-        }
-
         private void Randomize() {
             Random rand = new Random();
 
@@ -314,13 +289,28 @@ namespace MathDraw {
             }
         }
 
-        private void RandomizeBtn_Clicked(object sender, EventArgs e) {
-            Randomize();
-        }
+        #endregion
+
+        #region utils
 
         private void MessageBoxDebug(string text) {
             if (msgBoxDebug)
                 MessageBox.Show(text);
         }
+
+        /*
+        private string CalculateEta(DateTime processStarted, int totalElements, int processedElements) {
+
+            float timePassed = (processStarted - DateTime.Now).Milliseconds;
+
+            float itemsPerMiliSecond = processedElements / Math.Abs(timePassed);
+
+            float miliSecondsRemaining = (totalElements - processedElements) / (itemsPerMiliSecond);
+
+            return new TimeSpan(0, 0, (int)miliSecondsRemaining * 1000).ToString();
+        }
+        */
+
+        #endregion
     }
 }
