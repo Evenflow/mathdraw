@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MathDraw")]
+[assembly: AssemblyTitle("Math Draw")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MathDraw")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyProduct("Math Draw - ASCII drawing tool using a math formula")]
+[assembly: AssemblyCopyright("Copyright ©  2016 Andrey Lopukhov")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
