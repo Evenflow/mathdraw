@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -9,8 +10,9 @@ namespace MathDraw {
 
         #region vars
 
+        delegate void SetLabelCallback(string text, Label label);
         delegate void SetTextCallback(string text, int selectedTab);
-        delegate void SetProgressCallback(int progress, ProgressBar pb, TabPage page, Button stopBtn);
+        delegate void SetProgressCallback(int progress, ProgressBar pb, TabPage page, Button stopBtn, Label label);
 
         List<Thread> threadList;
         List<RichTextBox> textBoxList;
@@ -48,6 +50,19 @@ namespace MathDraw {
 
         #region draw main methods
 
+        private void SetLabel(string text, Label label) {
+
+            if (!String.IsNullOrEmpty(text)) {
+
+                if (label.InvokeRequired) {
+                    SetLabelCallback d = new SetLabelCallback(SetLabel);
+                    this.Invoke(d, new object[] { text, label });
+                } else {
+                    label.Text = text;
+                }
+            }
+        }
+
         private void SetText(string text, int selectedTab) {
 
             if (!String.IsNullOrEmpty(text)) {
@@ -61,21 +76,27 @@ namespace MathDraw {
             }
         }
 
-        private void Draw(string formula, int start, int end, Thread thread, int selectedTab, ProgressBar pb, TabPage page, Button stopBtn) {
+        private void Draw(string formula, int start, int end, Thread thread, int selectedTab, ProgressBar pb, TabPage page, Button stopBtn, Label timeLeftLabel) {
 
             try {
 
                 float diff = Math.Abs(start - end);
 
+                DateTime started = DateTime.Now;
+
                 SetText(formula + "\n\n", selectedTab);
 
-                int proc = 0;
+                int counter = 0;
 
                 for (int i = start; i <= end; i++) {
 
-                    SetProgress((int)((proc / diff)* 100), pb, page, stopBtn);
+                    SetProgress((int)((counter / diff)* 100), pb, page, stopBtn, timeLeftLabel);
 
-                    proc++;
+                    string eta = CalculateEta(started, (int)diff, counter);
+
+                    SetLabel(eta, timeLeftLabel);
+
+                    counter++;
 
                     if (i > start)
                         SetText("\n", selectedTab);
@@ -210,16 +231,17 @@ namespace MathDraw {
 
         #region draw additional methods
 
-        private void SetProgress(int progress, ProgressBar pb, TabPage page, Button stopBtn) {
+        private void SetProgress(int progress, ProgressBar pb, TabPage page, Button stopBtn, Label label) {
 
             if (pb.InvokeRequired) {
                 SetProgressCallback d = new SetProgressCallback(SetProgress);
-                this.Invoke(d, new object[] { progress, pb, page, stopBtn });
+                this.Invoke(d, new object[] { progress, pb, page, stopBtn, label });
             } else {
                 pb.Value = progress;
             }
 
             if (progress == 100) {
+                page.Controls.Remove(label);
                 page.Controls.Remove(pb);
                 page.Controls.Remove(stopBtn);
             }
@@ -254,13 +276,19 @@ namespace MathDraw {
             btnClose.Dock = DockStyle.Bottom;
 
             ProgressBar pb = new ProgressBar();
-            pb.Dock = DockStyle.Bottom;
+            pb.Dock = DockStyle.Top;
+
+            Label timeLeftLabel = new Label();
+            timeLeftLabel.Text = "test!";
+            timeLeftLabel.Dock = DockStyle.Top;
+            timeLeftLabel.TextAlign = ContentAlignment.MiddleCenter;
 
             page.Controls.Add(stopBtn);
             page.Controls.Add(btnClose);
+            page.Controls.Add(timeLeftLabel);
             page.Controls.Add(pb);
 
-            Thread newt = new Thread(() => Draw(formula.Text, minn, maxn, threadList[threadList.Count - 1], selectedTab, pb, page, stopBtn));
+            Thread newt = new Thread(() => Draw(formula.Text, minn, maxn, threadList[threadList.Count - 1], selectedTab, pb, page, stopBtn, timeLeftLabel));
             newt.Start();
 
             stopBtn.Click += (sender, EventArgs) => { Stop(sender, EventArgs, page, newt, stopBtn); };
@@ -298,18 +326,27 @@ namespace MathDraw {
                 MessageBox.Show(text);
         }
 
-        /*
+
         private string CalculateEta(DateTime processStarted, int totalElements, int processedElements) {
 
-            float timePassed = (processStarted - DateTime.Now).Milliseconds;
+            string seconds = TimeSpan.FromTicks(DateTime.Now.Subtract(processStarted).Ticks * (totalElements - (processedElements+1)) / (processedElements+1)).Seconds.ToString();
+            string minutes = TimeSpan.FromTicks(DateTime.Now.Subtract(processStarted).Ticks * (totalElements - (processedElements+1)) / (processedElements+1)).Minutes.ToString();
+            string hours = TimeSpan.FromTicks(DateTime.Now.Subtract(processStarted).Ticks * (totalElements - (processedElements+1)) / (processedElements+1)).Hours.ToString();
 
-            float itemsPerMiliSecond = processedElements / Math.Abs(timePassed);
 
-            float miliSecondsRemaining = (totalElements - processedElements) / (itemsPerMiliSecond);
 
-            return new TimeSpan(0, 0, (int)miliSecondsRemaining * 1000).ToString();
+            return string.Format("Time left: {0}:{1}:{2}", AddZero(hours), AddZero(minutes), AddZero(seconds));
         }
-        */
+
+        private string AddZero(string timeInput) {
+
+            int length = timeInput.Length;
+
+            if (length == 1)
+                return ("0" + timeInput.ToString());
+            else
+                return (timeInput.ToString());
+        }
 
         #endregion
     }
