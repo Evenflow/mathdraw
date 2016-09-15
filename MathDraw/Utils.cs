@@ -9,12 +9,13 @@ namespace MathDraw {
 
         public static Utils instance;
 
-        public Utils() {
-            if (instance == null)
-                instance = this;
+        static Utils() {
+
+            instance = new Utils();
         }
 
         public void MessageBoxDebug(string text) {
+
             if (msgBoxDebug)
                 MessageBox.Show(text);
         }

@@ -31,9 +31,6 @@ namespace MathDraw {
         int labelCounter = 0;
         int remCoresNumber;
 
-        Utils utils;
-        NCalc ncalc;
-
         #endregion
 
         #region core affinity
@@ -64,9 +61,6 @@ namespace MathDraw {
             textBoxList = new List<RichTextBox>();
             threadList = new List<Thread>();
             remCoresNumber = coresNumber;
-
-            utils = new Utils();
-            ncalc = new NCalc();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {

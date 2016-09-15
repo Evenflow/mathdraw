@@ -9,9 +9,9 @@ namespace MathDraw {
 
         public static NCalc instance;
 
-        public NCalc() {
-            if (instance == null)
-                instance = this;
+        static NCalc() {
+
+            instance = new NCalc();
         }
 
         public double Formula_Parser(string formula, int x, int y, Thread thread) {
