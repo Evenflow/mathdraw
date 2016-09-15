@@ -5,11 +5,11 @@ using System.Windows.Forms;
 
 namespace MathDraw {
 
-    class Calc {
+    class NCalc {
 
         Action<string> MessageBoxDebug;
 
-        public Calc(Action<string> MessageBoxDebug) {
+        public NCalc(Action<string> MessageBoxDebug) {
 
             this.MessageBoxDebug = MessageBoxDebug;
         }

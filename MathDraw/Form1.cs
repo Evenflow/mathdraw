@@ -19,7 +19,7 @@ namespace MathDraw {
 
         bool msgBoxDebug = true;
 
-        Calc calc;
+        NCalc calc;
 
         #endregion
 
@@ -33,7 +33,7 @@ namespace MathDraw {
 
             textBoxList = new List<RichTextBox>();
             threadList = new List<Thread>();
-            calc = new Calc(MessageBoxDebug);
+            calc = new NCalc(MessageBoxDebug);
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
