@@ -145,10 +145,10 @@ namespace MathDraw {
 
 
                 page.Controls.Add(textBoxList[currentTabIndex]);
-                tabControl1.TabPages.Add(page);
-                tabControl1.SelectedTab = page;
+                tabsHolder.TabPages.Add(page);
+                tabsHolder.SelectedTab = page;
 
-                if (checkBox1.Checked)
+                if (randomizeCheckBox.Checked)
                     Randomize();
 
                 int minn = int.Parse(minNum.Text);
@@ -193,9 +193,9 @@ namespace MathDraw {
 
             } catch (Exception ex) {
 
+                thread.Abort();
                 Console.WriteLine(ex.ToString());
                 MessageBoxDebug("Evaluate: " + ex.ToString());
-                thread.Abort();
                 return 0;
             }
         }
@@ -210,7 +210,7 @@ namespace MathDraw {
 
         void Close(object sender, EventArgs e, TabPage page, Thread thread) {
             if (page != null)
-                tabControl1.TabPages.Remove(page);
+                tabsHolder.TabPages.Remove(page);
 
             if (thread != null)
                 thread.Abort();

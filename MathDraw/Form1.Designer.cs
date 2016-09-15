@@ -24,23 +24,23 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button1 = new System.Windows.Forms.Button();
+            this.drawBtn = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.randomizeCheckBox = new System.Windows.Forms.CheckBox();
+            this.randomizeBtn = new System.Windows.Forms.Button();
             this.formula = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.charmod = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.fontColorBtn = new System.Windows.Forms.Button();
+            this.backgroundBtn = new System.Windows.Forms.Button();
+            this.fontBtn = new System.Windows.Forms.Button();
             this.maxNum = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.minNum = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabsHolder = new System.Windows.Forms.TabControl();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
@@ -63,18 +63,18 @@
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // drawBtn
             // 
-            this.button1.AutoSize = true;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button1.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button1.Location = new System.Drawing.Point(0, 517);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(775, 39);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "draw";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.drawBtn_Clicked);
+            this.drawBtn.AutoSize = true;
+            this.drawBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.drawBtn.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.drawBtn.Location = new System.Drawing.Point(0, 517);
+            this.drawBtn.Name = "drawBtn";
+            this.drawBtn.Size = new System.Drawing.Size(775, 39);
+            this.drawBtn.TabIndex = 0;
+            this.drawBtn.Text = "draw";
+            this.drawBtn.UseVisualStyleBackColor = true;
+            this.drawBtn.Click += new System.EventHandler(this.drawBtn_Clicked);
             // 
             // splitContainer1
             // 
@@ -89,7 +89,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
+            this.splitContainer1.Panel2.Controls.Add(this.tabsHolder);
             this.splitContainer1.Size = new System.Drawing.Size(775, 491);
             this.splitContainer1.SplitterDistance = 125;
             this.splitContainer1.SplitterIncrement = 2;
@@ -98,15 +98,15 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.randomizeCheckBox);
+            this.groupBox1.Controls.Add(this.randomizeBtn);
             this.groupBox1.Controls.Add(this.formula);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.charmod);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.fontColorBtn);
+            this.groupBox1.Controls.Add(this.backgroundBtn);
+            this.groupBox1.Controls.Add(this.fontBtn);
             this.groupBox1.Controls.Add(this.maxNum);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.minNum);
@@ -120,27 +120,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings: ";
             // 
-            // checkBox1
+            // randomizeCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkBox1.Location = new System.Drawing.Point(3, 170);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(119, 18);
-            this.checkBox1.TabIndex = 23;
-            this.checkBox1.Text = "randomize each draw";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.randomizeCheckBox.AutoSize = true;
+            this.randomizeCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.randomizeCheckBox.Location = new System.Drawing.Point(3, 170);
+            this.randomizeCheckBox.Name = "randomizeCheckBox";
+            this.randomizeCheckBox.Size = new System.Drawing.Size(119, 18);
+            this.randomizeCheckBox.TabIndex = 23;
+            this.randomizeCheckBox.Text = "randomize each draw";
+            this.randomizeCheckBox.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // randomizeBtn
             // 
-            this.button5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button5.Location = new System.Drawing.Point(3, 147);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(119, 23);
-            this.button5.TabIndex = 22;
-            this.button5.Text = "randomize";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.RandomizeBtn_Clicked);
+            this.randomizeBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.randomizeBtn.Location = new System.Drawing.Point(3, 147);
+            this.randomizeBtn.Name = "randomizeBtn";
+            this.randomizeBtn.Size = new System.Drawing.Size(119, 23);
+            this.randomizeBtn.TabIndex = 22;
+            this.randomizeBtn.Text = "randomize";
+            this.randomizeBtn.UseVisualStyleBackColor = true;
+            this.randomizeBtn.Click += new System.EventHandler(this.RandomizeBtn_Clicked);
             // 
             // formula
             // 
@@ -186,38 +186,38 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Char modifier";
             // 
-            // button2
+            // fontColorBtn
             // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button2.Location = new System.Drawing.Point(3, 419);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(119, 23);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "font color";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.fontColorBtn_Clicked);
+            this.fontColorBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.fontColorBtn.Location = new System.Drawing.Point(3, 419);
+            this.fontColorBtn.Name = "fontColorBtn";
+            this.fontColorBtn.Size = new System.Drawing.Size(119, 23);
+            this.fontColorBtn.TabIndex = 13;
+            this.fontColorBtn.Text = "font color";
+            this.fontColorBtn.UseVisualStyleBackColor = true;
+            this.fontColorBtn.Click += new System.EventHandler(this.fontColorBtn_Clicked);
             // 
-            // button4
+            // backgroundBtn
             // 
-            this.button4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button4.Location = new System.Drawing.Point(3, 442);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(119, 23);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "background color";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.backgroundColorBtn_Clicked);
+            this.backgroundBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.backgroundBtn.Location = new System.Drawing.Point(3, 442);
+            this.backgroundBtn.Name = "backgroundBtn";
+            this.backgroundBtn.Size = new System.Drawing.Size(119, 23);
+            this.backgroundBtn.TabIndex = 12;
+            this.backgroundBtn.Text = "background color";
+            this.backgroundBtn.UseVisualStyleBackColor = true;
+            this.backgroundBtn.Click += new System.EventHandler(this.backgroundColorBtn_Clicked);
             // 
-            // button3
+            // fontBtn
             // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button3.Location = new System.Drawing.Point(3, 465);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(119, 23);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "font";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.fontBtn_Clicked);
+            this.fontBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.fontBtn.Location = new System.Drawing.Point(3, 465);
+            this.fontBtn.Name = "fontBtn";
+            this.fontBtn.Size = new System.Drawing.Size(119, 23);
+            this.fontBtn.TabIndex = 11;
+            this.fontBtn.Text = "font";
+            this.fontBtn.UseVisualStyleBackColor = true;
+            this.fontBtn.Click += new System.EventHandler(this.fontBtn_Clicked);
             // 
             // maxNum
             // 
@@ -263,14 +263,14 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "start";
             // 
-            // tabControl1
+            // tabsHolder
             // 
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(649, 491);
-            this.tabControl1.TabIndex = 1;
+            this.tabsHolder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabsHolder.Location = new System.Drawing.Point(0, 0);
+            this.tabsHolder.Name = "tabsHolder";
+            this.tabsHolder.SelectedIndex = 0;
+            this.tabsHolder.Size = new System.Drawing.Size(649, 491);
+            this.tabsHolder.TabIndex = 1;
             // 
             // fontDialog1
             // 
@@ -358,7 +358,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 556);
             this.Controls.Add(this.splitContainer2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.drawBtn);
             this.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -387,27 +387,27 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button drawBtn;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.ColorDialog colorDialog2;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox randomizeCheckBox;
+        private System.Windows.Forms.Button randomizeBtn;
         private System.Windows.Forms.TextBox formula;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox charmod;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button fontColorBtn;
+        private System.Windows.Forms.Button backgroundBtn;
+        private System.Windows.Forms.Button fontBtn;
         private System.Windows.Forms.TextBox maxNum;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox minNum;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabsHolder;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
