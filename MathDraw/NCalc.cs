@@ -3,18 +3,23 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace MathDraw {
+namespace MathDraw
+{
 
-    public sealed class NCalc {
+    public sealed class NCalc
+    {
 
         private static readonly Object s_lock = new Object();
         private static NCalc instance = null;
 
-        private NCalc() {
+        private NCalc()
+        {
         }
 
-        public static NCalc Instance {
-            get {
+        public static NCalc Instance
+        {
+            get
+            {
                 if (instance != null) return instance;
                 Monitor.Enter(s_lock);
                 NCalc temp = new NCalc();
@@ -24,15 +29,15 @@ namespace MathDraw {
             }
         }
 
-        public double Formula_Parser(string formula, int x, int y, Thread thread) {
+        public double Formula_Parser(string formula, int x, int y, Thread thread)
+        {
 
             formula = formula.Trim();
 
-            if (String.IsNullOrEmpty(formula)) {
-
+            if (String.IsNullOrEmpty(formula))
+            {
                 MessageBox.Show("Formula cannot be empty!");
                 thread.Abort();
-                return 0;
             }
 
             formula = formula.Replace("i", x.ToString());
@@ -41,17 +46,16 @@ namespace MathDraw {
             return Evaluate(formula, thread);
         }
 
-        private double Evaluate(string expression, Thread thread) {
+        private double Evaluate(string expression, Thread thread)
+        {
 
-            try {
-
+            try
+            {
                 Expression e = new Expression(expression);
                 return Double.Parse(e.Evaluate().ToString());
-
-            } catch (Exception ex) {
-
-                thread.Abort();
-                Console.WriteLine(ex.ToString());
+            }
+            catch (Exception ex)
+            {
                 Utils.Instance.MessageBoxDebug("Evaluate: " + ex.ToString());
                 return 0;
             }

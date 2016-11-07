@@ -40,17 +40,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.minNum = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabsHolder = new System.Windows.Forms.TabControl();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.tabsHolder = new System.Windows.Forms.TabControl();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -72,7 +71,7 @@
             this.drawBtn.Name = "drawBtn";
             this.drawBtn.Size = new System.Drawing.Size(775, 39);
             this.drawBtn.TabIndex = 0;
-            this.drawBtn.Text = "draw";
+            this.drawBtn.Text = "Draw";
             this.drawBtn.UseVisualStyleBackColor = true;
             this.drawBtn.Click += new System.EventHandler(this.drawBtn_Clicked);
             // 
@@ -128,7 +127,7 @@
             this.randomizeCheckBox.Name = "randomizeCheckBox";
             this.randomizeCheckBox.Size = new System.Drawing.Size(119, 18);
             this.randomizeCheckBox.TabIndex = 23;
-            this.randomizeCheckBox.Text = "randomize each draw";
+            this.randomizeCheckBox.Text = "Randomize each draw";
             this.randomizeCheckBox.UseVisualStyleBackColor = true;
             // 
             // randomizeBtn
@@ -138,9 +137,9 @@
             this.randomizeBtn.Name = "randomizeBtn";
             this.randomizeBtn.Size = new System.Drawing.Size(119, 23);
             this.randomizeBtn.TabIndex = 22;
-            this.randomizeBtn.Text = "randomize";
+            this.randomizeBtn.Text = "Randomize";
             this.randomizeBtn.UseVisualStyleBackColor = true;
-            this.randomizeBtn.Click += new System.EventHandler(this.RandomizeBtn_Clicked);
+            this.randomizeBtn.Click += new System.EventHandler(this.randomizeBtn_Clicked);
             // 
             // formula
             // 
@@ -162,7 +161,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 14);
             this.label5.TabIndex = 20;
-            this.label5.Text = "formula";
+            this.label5.Text = "Formula";
             // 
             // charmod
             // 
@@ -193,7 +192,7 @@
             this.fontColorBtn.Name = "fontColorBtn";
             this.fontColorBtn.Size = new System.Drawing.Size(119, 23);
             this.fontColorBtn.TabIndex = 13;
-            this.fontColorBtn.Text = "font color";
+            this.fontColorBtn.Text = "Font color";
             this.fontColorBtn.UseVisualStyleBackColor = true;
             this.fontColorBtn.Click += new System.EventHandler(this.fontColorBtn_Clicked);
             // 
@@ -204,7 +203,7 @@
             this.backgroundBtn.Name = "backgroundBtn";
             this.backgroundBtn.Size = new System.Drawing.Size(119, 23);
             this.backgroundBtn.TabIndex = 12;
-            this.backgroundBtn.Text = "background color";
+            this.backgroundBtn.Text = "Background color";
             this.backgroundBtn.UseVisualStyleBackColor = true;
             this.backgroundBtn.Click += new System.EventHandler(this.backgroundColorBtn_Clicked);
             // 
@@ -215,7 +214,7 @@
             this.fontBtn.Name = "fontBtn";
             this.fontBtn.Size = new System.Drawing.Size(119, 23);
             this.fontBtn.TabIndex = 11;
-            this.fontBtn.Text = "font";
+            this.fontBtn.Text = "Font";
             this.fontBtn.UseVisualStyleBackColor = true;
             this.fontBtn.Click += new System.EventHandler(this.fontBtn_Clicked);
             // 
@@ -239,7 +238,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(28, 14);
             this.label4.TabIndex = 6;
-            this.label4.Text = "end";
+            this.label4.Text = "End";
             // 
             // minNum
             // 
@@ -261,16 +260,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 14);
             this.label3.TabIndex = 4;
-            this.label3.Text = "start";
-            // 
-            // tabsHolder
-            // 
-            this.tabsHolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabsHolder.Location = new System.Drawing.Point(0, 0);
-            this.tabsHolder.Name = "tabsHolder";
-            this.tabsHolder.SelectedIndex = 0;
-            this.tabsHolder.Size = new System.Drawing.Size(649, 491);
-            this.tabsHolder.TabIndex = 1;
+            this.label3.Text = "Start";
             // 
             // fontDialog1
             // 
@@ -301,19 +291,14 @@
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 3;
             // 
-            // menuStrip1
+            // tabsHolder
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Silver;
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(775, 25);
-            this.menuStrip1.TabIndex = 5;
-            this.menuStrip1.Text = "menuStrip1";
+            this.tabsHolder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabsHolder.Location = new System.Drawing.Point(0, 0);
+            this.tabsHolder.Name = "tabsHolder";
+            this.tabsHolder.SelectedIndex = 0;
+            this.tabsHolder.Size = new System.Drawing.Size(649, 491);
+            this.tabsHolder.TabIndex = 1;
             // 
             // fileToolStripMenuItem
             // 
@@ -333,24 +318,31 @@
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helpToolStripMenuItem1,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Desktop;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // helpToolStripMenuItem1
-            // 
-            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
-            this.helpToolStripMenuItem1.Text = "Help";
-            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Silver;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menuStrip1.Size = new System.Drawing.Size(775, 25);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // Form1
             // 
@@ -412,7 +404,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }

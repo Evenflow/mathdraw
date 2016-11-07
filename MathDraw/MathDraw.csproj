@@ -39,7 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NCalc">
-      <HintPath>..\..\..\..\Desktop\NCalc.dll</HintPath>
+      <HintPath>..\Binary\NCalc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
