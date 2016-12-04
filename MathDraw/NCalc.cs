@@ -5,11 +5,9 @@ using System.Windows.Forms;
 
 namespace MathDraw
 {
-
     public sealed class NCalc
     {
-
-        private static readonly Object s_lock = new Object();
+        private static readonly object s_lock = new object();
         private static NCalc instance = null;
 
         private NCalc()
@@ -22,22 +20,23 @@ namespace MathDraw
             {
                 if (instance != null) return instance;
                 Monitor.Enter(s_lock);
-                NCalc temp = new NCalc();
+                var temp = new NCalc();
                 Interlocked.Exchange(ref instance, temp);
                 Monitor.Exit(s_lock);
                 return instance;
             }
         }
 
-        public double Formula_Parser(string formula, int x, int y, Thread thread)
+        public double Formula_Parser(string formula, int x, int y, Thread thread = null)
         {
-
             formula = formula.Trim();
 
-            if (String.IsNullOrEmpty(formula))
+            if (string.IsNullOrEmpty(formula))
             {
                 MessageBox.Show("Formula cannot be empty!");
-                thread.Abort();
+                if (thread != null)
+                    thread.Abort();
+                return 0;
             }
 
             formula = formula.Replace("i", x.ToString());
@@ -48,11 +47,10 @@ namespace MathDraw
 
         private double Evaluate(string expression, Thread thread)
         {
-
             try
             {
                 Expression e = new Expression(expression);
-                return Double.Parse(e.Evaluate().ToString());
+                return double.Parse(e.Evaluate().ToString());
             }
             catch (Exception ex)
             {
