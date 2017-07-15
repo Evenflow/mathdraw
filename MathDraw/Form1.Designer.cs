@@ -40,16 +40,17 @@
             this.label4 = new System.Windows.Forms.Label();
             this.minNum = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.tabsHolder = new System.Windows.Forms.TabControl();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.tabsHolder = new System.Windows.Forms.TabControl();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fontReference = new System.Windows.Forms.FontDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -66,7 +67,7 @@
             // 
             this.drawBtn.AutoSize = true;
             this.drawBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.drawBtn.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.drawBtn.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.drawBtn.Location = new System.Drawing.Point(0, 517);
             this.drawBtn.Name = "drawBtn";
             this.drawBtn.Size = new System.Drawing.Size(775, 39);
@@ -111,7 +112,7 @@
             this.groupBox1.Controls.Add(this.minNum);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.groupBox1.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(125, 491);
@@ -123,9 +124,10 @@
             // 
             this.randomizeCheckBox.AutoSize = true;
             this.randomizeCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.randomizeCheckBox.Location = new System.Drawing.Point(3, 170);
+            this.randomizeCheckBox.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.randomizeCheckBox.Location = new System.Drawing.Point(3, 198);
             this.randomizeCheckBox.Name = "randomizeCheckBox";
-            this.randomizeCheckBox.Size = new System.Drawing.Size(119, 18);
+            this.randomizeCheckBox.Size = new System.Drawing.Size(119, 20);
             this.randomizeCheckBox.TabIndex = 23;
             this.randomizeCheckBox.Text = "Randomize each draw";
             this.randomizeCheckBox.UseVisualStyleBackColor = true;
@@ -133,7 +135,8 @@
             // randomizeBtn
             // 
             this.randomizeBtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.randomizeBtn.Location = new System.Drawing.Point(3, 147);
+            this.randomizeBtn.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.randomizeBtn.Location = new System.Drawing.Point(3, 175);
             this.randomizeBtn.Name = "randomizeBtn";
             this.randomizeBtn.Size = new System.Drawing.Size(119, 23);
             this.randomizeBtn.TabIndex = 22;
@@ -144,11 +147,11 @@
             // formula
             // 
             this.formula.Dock = System.Windows.Forms.DockStyle.Top;
-            this.formula.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.formula.Location = new System.Drawing.Point(3, 128);
+            this.formula.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.formula.Location = new System.Drawing.Point(3, 152);
             this.formula.MaxLength = 40;
             this.formula.Name = "formula";
-            this.formula.Size = new System.Drawing.Size(119, 19);
+            this.formula.Size = new System.Drawing.Size(119, 23);
             this.formula.TabIndex = 21;
             this.formula.Text = "i * j";
             // 
@@ -156,21 +159,21 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label5.Location = new System.Drawing.Point(3, 114);
+            this.label5.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label5.Location = new System.Drawing.Point(3, 136);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 14);
+            this.label5.Size = new System.Drawing.Size(60, 16);
             this.label5.TabIndex = 20;
             this.label5.Text = "Formula";
             // 
             // charmod
             // 
             this.charmod.Dock = System.Windows.Forms.DockStyle.Top;
-            this.charmod.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.charmod.Location = new System.Drawing.Point(3, 95);
+            this.charmod.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.charmod.Location = new System.Drawing.Point(3, 113);
             this.charmod.MaxLength = 40;
             this.charmod.Name = "charmod";
-            this.charmod.Size = new System.Drawing.Size(119, 19);
+            this.charmod.Size = new System.Drawing.Size(119, 23);
             this.charmod.TabIndex = 17;
             this.charmod.Text = "32";
             // 
@@ -178,16 +181,17 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label1.Location = new System.Drawing.Point(3, 81);
+            this.label1.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label1.Location = new System.Drawing.Point(3, 97);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 14);
+            this.label1.Size = new System.Drawing.Size(93, 16);
             this.label1.TabIndex = 16;
             this.label1.Text = "Char modifier";
             // 
             // fontColorBtn
             // 
             this.fontColorBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.fontColorBtn.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.fontColorBtn.Location = new System.Drawing.Point(3, 419);
             this.fontColorBtn.Name = "fontColorBtn";
             this.fontColorBtn.Size = new System.Drawing.Size(119, 23);
@@ -199,6 +203,7 @@
             // backgroundBtn
             // 
             this.backgroundBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.backgroundBtn.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.backgroundBtn.Location = new System.Drawing.Point(3, 442);
             this.backgroundBtn.Name = "backgroundBtn";
             this.backgroundBtn.Size = new System.Drawing.Size(119, 23);
@@ -210,6 +215,7 @@
             // fontBtn
             // 
             this.fontBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.fontBtn.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.fontBtn.Location = new System.Drawing.Point(3, 465);
             this.fontBtn.Name = "fontBtn";
             this.fontBtn.Size = new System.Drawing.Size(119, 23);
@@ -221,11 +227,11 @@
             // maxNum
             // 
             this.maxNum.Dock = System.Windows.Forms.DockStyle.Top;
-            this.maxNum.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.maxNum.Location = new System.Drawing.Point(3, 62);
+            this.maxNum.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.maxNum.Location = new System.Drawing.Point(3, 74);
             this.maxNum.MaxLength = 5;
             this.maxNum.Name = "maxNum";
-            this.maxNum.Size = new System.Drawing.Size(119, 19);
+            this.maxNum.Size = new System.Drawing.Size(119, 23);
             this.maxNum.TabIndex = 7;
             this.maxNum.Text = "15";
             // 
@@ -233,21 +239,21 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label4.Location = new System.Drawing.Point(3, 48);
+            this.label4.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label4.Location = new System.Drawing.Point(3, 58);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(28, 14);
+            this.label4.Size = new System.Drawing.Size(33, 16);
             this.label4.TabIndex = 6;
             this.label4.Text = "End";
             // 
             // minNum
             // 
             this.minNum.Dock = System.Windows.Forms.DockStyle.Top;
-            this.minNum.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.minNum.Location = new System.Drawing.Point(3, 29);
+            this.minNum.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.minNum.Location = new System.Drawing.Point(3, 35);
             this.minNum.MaxLength = 5;
             this.minNum.Name = "minNum";
-            this.minNum.Size = new System.Drawing.Size(119, 19);
+            this.minNum.Size = new System.Drawing.Size(119, 23);
             this.minNum.TabIndex = 5;
             this.minNum.Text = "-15";
             // 
@@ -255,20 +261,33 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label3.Location = new System.Drawing.Point(3, 15);
+            this.label3.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label3.Location = new System.Drawing.Point(3, 19);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 14);
+            this.label3.Size = new System.Drawing.Size(38, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Start";
             // 
+            // tabsHolder
+            // 
+            this.tabsHolder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabsHolder.Location = new System.Drawing.Point(0, 0);
+            this.tabsHolder.Name = "tabsHolder";
+            this.tabsHolder.SelectedIndex = 0;
+            this.tabsHolder.Size = new System.Drawing.Size(649, 491);
+            this.tabsHolder.TabIndex = 1;
+            // 
+            // colorDialog1
+            // 
+            this.colorDialog1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            // 
             // fontDialog1
             // 
-            this.fontDialog1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.fontDialog1.Font = new System.Drawing.Font("Courier New", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // colorDialog2
             // 
-            this.colorDialog2.Color = System.Drawing.Color.Lime;
+            this.colorDialog2.Color = System.Drawing.Color.Snow;
             // 
             // splitContainer2
             // 
@@ -291,49 +310,11 @@
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 3;
             // 
-            // tabsHolder
-            // 
-            this.tabsHolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabsHolder.Location = new System.Drawing.Point(0, 0);
-            this.tabsHolder.Name = "tabsHolder";
-            this.tabsHolder.SelectedIndex = 0;
-            this.tabsHolder.Size = new System.Drawing.Size(649, 491);
-            this.tabsHolder.TabIndex = 1;
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 21);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.Silver;
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
@@ -344,9 +325,43 @@
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 26);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 21);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // fontReference
+            // 
+            this.fontReference.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 556);
             this.Controls.Add(this.splitContainer2);
@@ -405,6 +420,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.FontDialog fontReference;
     }
 }
 

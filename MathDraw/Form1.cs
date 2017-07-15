@@ -4,10 +4,8 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace MathDraw
-{
-    public partial class Form1 : Form
-    {
+namespace MathDraw {
+    public partial class Form1 : Form {
         private delegate void SetLabelCallback(string text, Label label);
         private delegate void SetTextCallback(string text, int selectedTab);
         private delegate void SetProgressCallback(int progress, ProgressBar pb, TabPage page, Button stopBtn, Label label);
@@ -24,21 +22,18 @@ namespace MathDraw
 
         #region form1 stuff
 
-        public Form1()
-        {
+        public Form1() {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        private void Form1_Load(object sender, EventArgs e) {
             textBoxList = new List<RichTextBox>();
             threadList = new List<Thread>();
+            this.Font = fontReference.Font;
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            foreach (var item in threadList)
-            {
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            foreach (var item in threadList) {
                 if (item != null)
                     item.Abort();
             }
@@ -48,60 +43,42 @@ namespace MathDraw
 
         #region draw main methods
 
-        private void SetLabel(string text, Label label)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(text))
-                {
-                    if (label.InvokeRequired)
-                    {
+        private void SetLabel(string text, Label label) {
+            try {
+                if (!string.IsNullOrEmpty(text)) {
+                    if (label.InvokeRequired) {
                         var delgt = new SetLabelCallback(SetLabel);
                         Invoke(delgt, new object[] { text, label });
-                    }
-                    else
-                    {
+                    } else {
                         label.Text = text;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Utils.Instance.MessageBoxDebug("SetLabel: " + ex.ToString());
             }
         }
 
-        private void SetText(string text, int selectedTab)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(text) && textBoxList.Count > selectedTab)
-                {
+        private void SetText(string text, int selectedTab) {
+            try {
+                if (!string.IsNullOrEmpty(text) && textBoxList.Count > selectedTab) {
 
-                    if (textBoxList[selectedTab].InvokeRequired)
-                    {
+                    if (textBoxList[selectedTab].InvokeRequired) {
                         var delgt = new SetTextCallback(SetText);
                         Invoke(delgt, new object[] { text, selectedTab });
-                    }
-                    else
-                    {
+                    } else {
                         textBoxList[selectedTab].AppendText(text);
                     }
                 }
 
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Utils.Instance.MessageBoxDebug("SetText: " + ex.ToString());
             }
         }
 
-        private void Draw(string formula, int start, int end, Thread thread, int selectedTab, ProgressBar pb, TabPage page, Button stopBtn, Label timeLeftLabel)
-        {
+        private void Draw(string formula, int start, int end, Thread thread, int selectedTab, ProgressBar pb, TabPage page, Button stopBtn, Label timeLeftLabel) {
             string holder = "";
 
-            try
-            {
+            try {
                 var diff = Math.Abs(start - (float)end);
 
                 var started = DateTime.Now;
@@ -110,8 +87,7 @@ namespace MathDraw
 
                 var counter = 0;
 
-                for (var i = start; i <= end; i++)
-                {
+                for (var i = start; i <= end; i++) {
 
                     holder = "";
 
@@ -126,8 +102,7 @@ namespace MathDraw
                     if (i > start)
                         SetText("\n", selectedTab);
 
-                    for (var j = start; j <= end; j++)
-                    {
+                    for (var j = start; j <= end; j++) {
 
                         holder += CharGenerator(formula, thread, selectedTab, i, j);
                     }
@@ -139,22 +114,18 @@ namespace MathDraw
 
                 page.Controls.Remove(pb);
                 threadList.Remove(thread);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Utils.Instance.MessageBoxDebug("Draw: " + ex.ToString());
                 thread.Abort();
             }
         }
 
-        private string CharGenerator(string formula, Thread thread, int selectedTab, int i, int j)
-        {
+        private string CharGenerator(string formula, Thread thread, int selectedTab, int i, int j) {
             var result = (NCalc.Instance.Formula_Parser(formula, i, j, thread)).ToString();
 
             var len = result.Length;
 
-            while (len > 3)
-            {
+            while (len > 3) {
                 len -= 2;
             }
 
@@ -171,10 +142,8 @@ namespace MathDraw
 
         #region button clicks
 
-        private void drawBtn_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
+        private void drawBtn_Clicked(object sender, EventArgs e) {
+            try {
                 labelCounter++;
 
                 var page = new TabPage("Drawing " + (labelCounter).ToString());
@@ -203,63 +172,51 @@ namespace MathDraw
 
                 currentTabIndex++;
 
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Utils.Instance.MessageBoxDebug("drawBtn_Clicked: " + ex.ToString());
             }
         }
 
-        private void fontBtn_Clicked(object sender, EventArgs e)
-        {
+        private void fontBtn_Clicked(object sender, EventArgs e) {
             var result = fontDialog1.ShowDialog();
 
-            if (result == DialogResult.OK)
-            {
+            if (result == DialogResult.OK) {
                 var font = fontDialog1.Font;
 
-                foreach (var item in textBoxList)
-                {
+                foreach (var item in textBoxList) {
                     if (item != null)
                         item.Font = font;
                 }
             }
         }
 
-        private void fontColorBtn_Clicked(object sender, EventArgs e)
-        {
+        private void fontColorBtn_Clicked(object sender, EventArgs e) {
             var result = colorDialog2.ShowDialog();
 
-            if (result == DialogResult.OK)
-            {
+            if (result == DialogResult.OK) {
                 var color = colorDialog2.Color;
 
-                foreach (var item in textBoxList)
-                {
+                foreach (var item in textBoxList) {
                     if (item != null)
                         item.ForeColor = color;
                 }
             }
         }
 
-        private void backgroundColorBtn_Clicked(object sender, EventArgs e)
-        {
+        private void backgroundColorBtn_Clicked(object sender, EventArgs e) {
             var result = colorDialog1.ShowDialog();
 
-            if (result == DialogResult.OK)
-            {
+            if (result == DialogResult.OK) {
                 var color = colorDialog1.Color;
 
-                foreach (var item in textBoxList)
-                {
+                foreach (var item in textBoxList) {
                     if (item != null)
                         item.BackColor = color;
                 }
             }
         }
 
-        private void randomizeBtn_Clicked(object sender, EventArgs e)
-        {
+        private void randomizeBtn_Clicked(object sender, EventArgs e) {
             Randomize();
         }
 
@@ -267,43 +224,33 @@ namespace MathDraw
 
         #region draw additional methods
 
-        private void SetProgress(int progress, ProgressBar pb, TabPage page, Button stopBtn, Label label)
-        {
-            try
-            {
-                if (pb.InvokeRequired)
-                {
+        private void SetProgress(int progress, ProgressBar pb, TabPage page, Button stopBtn, Label label) {
+            try {
+                if (pb.InvokeRequired) {
                     var delgt = new SetProgressCallback(SetProgress);
                     Invoke(delgt, new object[] { progress, pb, page, stopBtn, label });
-                }
-                else
-                {
+                } else {
                     pb.Value = progress;
                 }
 
-                if (progress == 100)
-                {
+                if (progress == 100) {
                     page.Controls.Remove(label);
                     page.Controls.Remove(pb);
                     page.Controls.Remove(stopBtn);
                 }
 
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Utils.Instance.MessageBoxDebug("SetProgress: " + ex.ToString());
             }
         }
 
-        private void Stop(object sender, EventArgs e, TabPage page, Thread thread, Button btn)
-        {
+        private void Stop(object sender, EventArgs e, TabPage page, Thread thread, Button btn) {
             thread.Abort();
             threadList.Remove(thread);
             page.Controls.Remove(btn);
         }
 
-        private void Close(object sender, EventArgs e, TabPage page, Thread thread, RichTextBox richTextBox)
-        {
+        private void Close(object sender, EventArgs e, TabPage page, Thread thread, RichTextBox richTextBox) {
             textBoxList.Remove(richTextBox);
             tabsHolder.TabPages.Remove(page);
             currentTabIndex--;
@@ -311,8 +258,7 @@ namespace MathDraw
             threadList.Remove(thread);
         }
 
-        private Thread StartTheThread(int minn, int maxn, int selectedTab, TabPage page, RichTextBox richTextBox)
-        {
+        private Thread StartTheThread(int minn, int maxn, int selectedTab, TabPage page, RichTextBox richTextBox) {
             var stopBtn = new Button();
 
             stopBtn.Text = "Stop";
@@ -348,8 +294,7 @@ namespace MathDraw
             return thread;
         }
 
-        private void Randomize()
-        {
+        private void Randomize() {
             var rand = new Random();
 
             var range = 128;
